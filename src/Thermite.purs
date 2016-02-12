@@ -202,6 +202,13 @@ createReactSpec (Spec spec) state =
       <*> React.readState this
       <*> React.getChildren this
 
+mapPerformAction ::
+  forall eff state1 state2.
+  LensP state2 state1 ->
+  Producer (state1 -> state1) (Aff eff) Unit ->
+  Producer (state2 -> state2) (Aff eff) Unit
+mapPerformAction lens = bimapFreeT (bimap (over lens) id) id
+
 -- | This function captures the state of the `Spec` as a function argument.
 -- |
 -- | This can sometimes be useful in complex scenarios involving the `focus` and
