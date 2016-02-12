@@ -19,6 +19,7 @@ module Thermite
   , Spec()
   , _performAction
   , _render
+  , mapPerformAction
   , simpleSpec
   , createClass
   , createReactSpec
